@@ -52,11 +52,18 @@ class MainScene extends Phaser.Scene {
   scoreText: any;
   gameOver = false;
 
+  preload() {
+    this.load.image('sky', 'assets/sky.png');
+    this.load.image('ground', 'assets/platform.png');
+    this.load.image('star', 'assets/star.png');
+    this.load.image('bomb', 'assets/bomb.png');
+    this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 })
+  }
+
   create() {
     this.add.image(400, 300, 'sky');
 
     this.platforms = this.physics.add.staticGroup();
-    console.log(this.platforms.type);
 
     this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
 
@@ -114,15 +121,6 @@ class MainScene extends Phaser.Scene {
     this.physics.add.collider(this.bombs, this.player, this.hitBomb, undefined, this);
 
   }
-  preload() {
-    this.load.image('sky', 'assets/sky.png');
-    this.load.image('ground', 'assets/platform.png');
-    this.load.image('star', 'assets/star.png');
-    this.load.image('bomb', 'assets/bomb.png');
-    this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
-
-  }
-
   override update() {
     var cursors = this.input.keyboard.createCursorKeys();
 

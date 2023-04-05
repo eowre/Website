@@ -5,12 +5,16 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GameComponent } from './game/game.component';
+import { CircleGameComponent } from './circle-game/circle-game.component';
+import { VsComputerComponent } from './vs-computer/vs-computer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    GameComponent
+    GameComponent,
+    CircleGameComponent,
+    VsComputerComponent
   ],
   imports: [
     BrowserModule,
