@@ -7,6 +7,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GameComponent } from './game/game.component';
 import { CircleGameComponent } from './circle-game/circle-game.component';
 import { VsComputerComponent } from './vs-computer/vs-computer.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { VsComputerComponent } from './vs-computer/vs-computer.component';
     HomeComponent,
     GameComponent,
     CircleGameComponent,
-    VsComputerComponent
+    VsComputerComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

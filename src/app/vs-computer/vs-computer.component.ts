@@ -39,12 +39,15 @@ class MainScene extends Phaser.Scene {
     super({ key: 'main' });
   }
 
+  grid: any;
+
   preload() {
     this.load.image('bg', 'assets/aiBackground.png');
   }
 
   create() {
     this.add.image(400, 300, 'bg');
+    this.grid = this.add.grid()
 
   }
 
