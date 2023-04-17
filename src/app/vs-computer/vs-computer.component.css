@@ -31,8 +31,9 @@ div {
 td {
     text-align: center;
     background-color: #BA7A3A;
-    width: 65px;
-    height: 65px;
+    border: solid 1px white;
+    width: 64px;
+    height: 64px;
 }
 
 .red-turn-text {
@@ -55,7 +56,8 @@ td {
     padding: 12px;
     background-color: black;
     border: 1px solid white;
-    border-radius: 50px;
+    border-radius: 50%;
+    display: block;
 }
 
 .red-piece {
@@ -65,6 +67,7 @@ td {
     background-color: red;
     border: 1px solid white;
     border-radius: 50px;
+    display: block;
 }
 
 .king.red-piece {

@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    background-color: #e0f0ea;
+}
+header {
+    background-color: #95adbe;
+}
+footer {
+    background-color: #574f7d;
+}
+.first-alt-color {
+    background-color: #503a65;
+}
+.second-alt-color {
+    background-color: #3c2a4d;
+}
+.first {
+    background-color: #e0f0ea;
+}
+.second {
+    background-color: #95adbe;
+}
+.third {
+    background-color: #574f7d;
+}
+#gamediv {
+    margin: auto;
+}
+.dropdown-color {
+    background-color: #7DC2D2;
+}

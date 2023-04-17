@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import Phaser, { Physics } from 'phaser';
+import Phaser, { Physics, Scene } from 'phaser';
 
 @Component({
   selector: 'app-circle-game',
@@ -26,6 +26,7 @@ export class CircleGameComponent implements OnDestroy, OnInit{
         }
       },
       scale: {
+        parent: 'gamediv',
         autoCenter: Phaser.Scale.CENTER_BOTH,
       },
     }    
@@ -45,7 +46,6 @@ class MainScene extends Phaser.Scene {
   constructor() {
     super({ key: 'main' });
   }
-
   player : Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
   bombs: Phaser.Physics.Arcade.Group;  
   timer: any;
@@ -113,6 +113,7 @@ class MainScene extends Phaser.Scene {
     });
   }
   override update() {
+    this.gameOver;
     var cursor = this.input.keyboard.createCursorKeys();
 
     if (cursor.left.isDown) {
@@ -156,7 +157,7 @@ class MainScene extends Phaser.Scene {
       this.player.anims.play('turn');
     }
 
-    var gameRunTime = Math.round(this.time.now * 0.001) - 2;
+    var gameRunTime = Math.round(this.time.now * 0.001) - 1;
     var s = gameRunTime % 60;
     gameRunTime = (gameRunTime - s);
     var m = gameRunTime / 60;
@@ -168,17 +169,23 @@ class MainScene extends Phaser.Scene {
   }
   bombsAway(player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, bombs: Phaser.Physics.Arcade.Group, text: any){
     console.log("time loop working");
-    var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-    var y = (player.y < 300) ? Phaser.Math.Between(300, 600) : Phaser.Math.Between(0, 300);
-    var bomb = bombs.create(x, y, 'bombs');
-    bomb.setBounce(1);
-    bomb.setCollideWorldBounds(true);
-    bomb.setVelocity((Phaser.Math.Between(-1, 1) > 0 ? -300: 300), (Phaser.Math.Between(-1, 1) > 0 ? -300: 300));
-    bomb.allowGravity = false;
+    for (let i = 0; i < 3; i ++) {
+      var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+      var y = (player.y < 300) ? Phaser.Math.Between(300, 600) : Phaser.Math.Between(0, 300);
+      var bomb = bombs.create(x, y, 'bombs');
+      bomb.setBounce(1);
+      bomb.setCollideWorldBounds(true);
+      bomb.setVelocity((Phaser.Math.Between(-1, 1) > 0 ? -300: 200), (Phaser.Math.Between(-1, 1) > 0 ? -200: 300));
+      bomb.allowGravity = false;
+    }
   }
   gameOver(text: any, timer: any) {
     this.player.setTint(0xff0000);
-
+    let score = this.add.text(225, 500, 'Final Time: ${score}', { fontSize: '36px'}) 
+    score.setText(["Final Score: " + this.bombs.countActive() * 10]);
+    this.timer.setText([""]);
+    this.text.setText([""]);
+    this.player.anims.play("dead");
     this.scene.pause();
   }
 }

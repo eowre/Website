@@ -25,7 +25,8 @@ export class GameComponent implements OnInit, OnDestroy {
         }
       },
       scale: {
-        autoCenter: Phaser.Scale.CENTER_BOTH,
+        parent: 'gamediv2',
+        autoCenter: Phaser.Scale.CENTER_BOTH
       },
     }
   }

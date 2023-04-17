@@ -1,12 +1,29 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import Phaser, { Physics } from 'phaser';
 
 @Component({
   selector: 'app-vs-computer',
   templateUrl: './vs-computer.component.html',
   styleUrls: ['./vs-computer.component.css']
 })
-export class VsComputerComponent{
+export class VsComputerComponent implements OnInit{
+
+  ngOnInit() {
+    this.redsPieces = document.querySelectorAll("P");
+    if(this.turn) {
+      for (let i = 0; i < this.redsPieces.length; i++) {
+        this.redsPieces[i].addEventListener("click", this.getPlayerPieces);
+      }
+    } else  {
+      for (let i = 0; i < this.blacksPieces.length; i++) {
+        this.blacksPieces[i].addEventListener("click", this.getPlayerPieces);
+      }
+    }
+    this.blacksPieces = document.querySelectorAll("span");
+    this.cells = document.querySelectorAll("td");
+    this.redTurnText = document.querySelectorAll(".red-turn-text");
+    this.blackTurnText = document.querySelectorAll(".black-turn-text");
+    this.divider = document.querySelector("#divider");
+  }  
   board = [ null, 0, null, 1, null, 2, null, 3,
             4, null, 5, null, 6, null, 7, null,
             null, 8, null, 9, null, 10, null, 11,
@@ -15,18 +32,18 @@ export class VsComputerComponent{
             12, null, 13, null, 14, null, 15, null,
             null, 16, null, 17, null, 18, null, 19,
             20, null, 21, null, 22, null, 23, null];
-            
-  cells = document.querySelectorAll<HTMLElement>("td");
-  redsPieces = document.querySelectorAll<HTMLElement>("p");
-  blacksPieces = document.querySelectorAll<HTMLElement>("span");
-  redTurnText = document.querySelectorAll<HTMLElement>(".red-turn-text");
-  blackTurnText = document.querySelectorAll<HTMLElement>(".black-turn-text");
-  divider = document.querySelector<HTMLElement>("#divider");
 
+  cells: NodeListOf<HTMLElement>;
+  redsPieces: NodeListOf<HTMLElement>;
+  blacksPieces: NodeListOf<HTMLElement>;
+  redTurnText: NodeListOf<HTMLElement>;
+  blackTurnText: NodeListOf<HTMLElement>;
+  divider: HTMLElement;
+  
   turn = true;
   redScore = 12;
   blackScore = 12;
-  playerPieces: any;
+  playerPieces: NodeListOf<HTMLElement>;
 
   selectedPiece = {
     pieceId: -1,
@@ -42,29 +59,36 @@ export class VsComputerComponent{
     minusEighteenthSpace: false
   }
 
-  givePiecesEventListener() {
-    if(this.turn) {
-      for(let i = 0; i < this.redsPieces.length; i++) {
-        this.redsPieces[i].addEventListener("click", this.getPlayerPieces);
-      }
-    } else {
-      for( let i = 0; i < this.blacksPieces.length; i++) {
-        this.blacksPieces[i].addEventListener("click", this.getPlayerPieces);
-      }
-    }
+  clicked() {
+    alert("added event successfully");
   }
 
-  getPlayerPieces(ev: any) {
+  // givePiecesEventListener() {
+  //   if(this.turn) {
+  //     for(let i = 0; i < this.redsPieces.length; i++) {
+  //       this.redsPieces[i].addEventListener("click", this.getPlayerPieces.bind(this));
+  //     }
+  //   } else {
+  //     for( let i = 0; i < this.blacksPieces.length; i++) {
+  //       this.blacksPieces[i].addEventListener("click", this.getPlayerPieces.bind(this));
+  //     }
+  //   }
+  // }
+
+  getPlayerPieces(ev: MouseEvent) {
+    alert(this.redsPieces.length);
     if (this.turn) {
+      alert(this.redsPieces.length)
       this.playerPieces = this.redsPieces;
     } else {
       this.playerPieces = this.blacksPieces;
     }
-    this.removeCellonclick();
-    this.resetBorders(ev);
+    // alert(this.playerPieces.length);
+    this.removeCellOnclick;
+    this.resetBorders;
   }
 
-  removeCellonclick() {
+  removeCellOnclick() {
     for (let i = 0; i < this.cells.length; i++) {
       this.cells[i].removeAttribute("onClick");
     }
@@ -250,7 +274,7 @@ export class VsComputerComponent{
       }
     }
     this.resetSelectedPieceProperties();
-    this.removeCellonclick();
+    this.removeCellOnclick();
     this.removeEventListeners();
   }
 
